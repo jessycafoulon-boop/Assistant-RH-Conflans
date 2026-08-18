@@ -1,0 +1,265 @@
+
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Assistant RH</title>
+<style>
+:root{
+  --primary:#2457a6;--primary-dark:#173d78;--bg:#f4f7fb;--card:#fff;
+  --text:#172033;--muted:#667085;--border:#dfe5ee;--success:#16794c;
+  --shadow:0 12px 35px rgba(23,32,51,.12);--radius:18px
+}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);font-family:Inter,ui-sans-serif,system-ui,-apple-system,"Segoe UI",Arial,sans-serif;color:var(--text)}
+button,input{font:inherit}
+.app{max-width:920px;margin:auto;min-height:100vh;display:flex;flex-direction:column}
+.header{background:linear-gradient(135deg,var(--primary),var(--primary-dark));color:#fff;padding:24px 24px 22px;position:sticky;top:0;z-index:3}
+.brand{display:flex;gap:14px;align-items:center}
+.logo{width:46px;height:46px;border-radius:14px;background:rgba(255,255,255,.16);display:grid;place-items:center;font-size:24px}
+h1{font-size:22px;margin:0 0 3px}.subtitle{font-size:13px;opacity:.88}
+.content{padding:22px 18px 30px;flex:1}
+.welcome{background:var(--card);border:1px solid var(--border);border-radius:var(--radius);padding:20px;box-shadow:var(--shadow);margin-bottom:18px}
+.welcome h2{font-size:19px;margin:0 0 8px}.welcome p{margin:0;color:var(--muted);line-height:1.5}
+.suggestions{display:flex;flex-wrap:wrap;gap:8px;margin-top:16px}
+.chip{border:1px solid var(--border);background:#fff;border-radius:999px;padding:9px 13px;cursor:pointer;color:var(--text)}
+.chip:hover{border-color:var(--primary);color:var(--primary)}
+.chat{display:flex;flex-direction:column;gap:12px}
+.msg{max-width:86%;padding:13px 15px;border-radius:16px;line-height:1.5;font-size:14px}
+.bot{align-self:flex-start;background:#fff;border:1px solid var(--border);border-bottom-left-radius:5px}
+.user{align-self:flex-end;background:var(--primary);color:#fff;border-bottom-right-radius:5px}
+.answer{background:#fff;border:1px solid var(--border);border-radius:16px;padding:16px;box-shadow:0 5px 18px rgba(23,32,51,.06)}
+.answer h3{font-size:16px;margin:0 0 7px}.answer p{margin:7px 0;color:#344054;line-height:1.5}
+.badge{display:inline-block;background:#eef4ff;color:var(--primary-dark);padding:5px 9px;border-radius:999px;font-size:12px;font-weight:700;margin-bottom:8px}
+.contact{margin-top:12px;padding:12px;border-radius:12px;background:#f7f9fc;border:1px solid var(--border)}
+.contact strong{display:block;margin-bottom:4px}.contact a{color:var(--primary);font-weight:700;text-decoration:none}
+.actions{display:flex;flex-wrap:wrap;gap:8px;margin-top:12px}
+.action{border:1px solid var(--border);background:#fff;border-radius:10px;padding:8px 11px;cursor:pointer;color:var(--text);text-decoration:none;font-size:13px}
+.action.primary{background:var(--primary);color:#fff;border-color:var(--primary)}
+.searchbar{position:sticky;bottom:0;background:rgba(244,247,251,.95);backdrop-filter:blur(10px);padding:12px 18px 18px;border-top:1px solid var(--border)}
+.form{display:flex;gap:8px;background:#fff;border:1px solid var(--border);border-radius:15px;padding:7px 7px 7px 13px;box-shadow:var(--shadow)}
+.form input{border:0;outline:0;flex:1;min-width:0;color:var(--text);background:transparent}
+.send{border:0;background:var(--primary);color:#fff;border-radius:10px;padding:10px 15px;cursor:pointer;font-weight:700}
+.disclaimer{font-size:11px;color:var(--muted);margin:8px 3px 0;text-align:center}
+.hidden{display:none!important}
+@media(max-width:600px){.header{padding:18px}.content{padding:15px 12px 24px}.searchbar{padding:10px 12px 15px}.msg{max-width:94%}}
+</style>
+</head>
+<body>
+<div class="app">
+  <header class="header">
+    <div class="brand">
+      <div class="logo">💬</div>
+      <div><h1>Assistant RH</h1><div class="subtitle" id="orgName">Votre assistant d'orientation RH</div></div>
+    </div>
+  </header>
+
+  <main class="content">
+    <section class="welcome">
+      <h2>Bonjour 👋</h2>
+      <p>Posez votre question avec vos propres mots. Je vous indique le service ou l'interlocuteur à contacter.</p>
+      <div class="suggestions" id="suggestions"></div>
+    </section>
+    <section class="chat" id="chat" aria-live="polite"></section>
+  </main>
+
+  <div class="searchbar">
+    <form class="form" id="questionForm">
+      <input id="question" autocomplete="off" placeholder="Ex. « Je ne comprends pas mon bulletin de salaire »" aria-label="Votre question">
+      <button class="send" type="submit">Envoyer</button>
+    </form>
+    <div class="disclaimer">Cet assistant fournit une orientation générale. Pour une situation individuelle, contactez l'interlocuteur indiqué.</div>
+  </div>
+</div>
+
+<script>
+/*
+  ============================================================
+  CONFIGURATION — À PERSONNALISER
+  ============================================================
+  1. Remplacez les coordonnées dans CONTACTS.
+  2. Modifiez/ajoutez les entrées FAQ.
+  3. Vous pouvez changer le nom de la collectivité dans ORG_NAME.
+*/
+
+const ORG_NAME = "Votre collectivité";
+
+const CONTACTS = {
+  gestionnaireCarriere: {
+    label: "Votre gestionnaire carrière",
+    email: "A_COMPLETER",
+    phone: "A_COMPLETER"
+  },
+  rhPaie: {
+    label: "RH Paie",
+    email: "RHpaie@A_COMPLETER",
+    phone: "A_COMPLETER"
+  },
+  formation: {
+    label: "Service Formation",
+    email: "A_COMPLETER",
+    phone: "A_COMPLETER"
+  },
+  jessyca: {
+    label: "Jessyca Foulon",
+    email: "A_COMPLETER",
+    phone: "01 34 90 XXXX"
+  },
+  informatique: {
+    label: "Service informatique",
+    email: "A_COMPLETER",
+    phone: "A_COMPLETER"
+  }
+};
+
+/*
+  Chaque entrée peut contenir :
+  - keywords : mots déclencheurs
+  - title : titre affiché
+  - category : catégorie
+  - answer : réponse générique
+  - contact : clé dans CONTACTS
+  - links : liens facultatifs
+*/
+const FAQ = [
+  {
+    id:"conges-solde",
+    category:"Congés / absences",
+    keywords:["congé","conges","congés","solde","jours","vacances","rtt","absence"],
+    title:"Question sur vos congés ou votre solde",
+    answer:"Pour une question concernant vos congés, votre solde de jours ou une anomalie dans votre compteur, contactez votre gestionnaire carrière.",
+    contact:"gestionnaireCarriere"
+  },
+  {
+    id:"bulletin",
+    category:"Paie",
+    keywords:["bulletin","salaire","paie","paye","remuneration","rémunération","fiche de paie","fiche de salaire","prime","prélèvement","prelevement"],
+    title:"Question sur votre bulletin de salaire",
+    answer:"Pour toute question sur votre dernier bulletin de salaire, son contenu, une prime, une retenue ou une variation de rémunération, contactez RH Paie.",
+    contact:"rhPaie"
+  },
+  {
+    id:"connexion-intranet",
+    category:"Intranet / accès",
+    keywords:["intranet","connexion","connecter","connexion intranet","mot de passe","identifiant","login","accès","acces"],
+    title:"Problème de connexion à l'intranet",
+    answer:"Si vous n'arrivez pas à vous connecter à l'intranet, contactez la personne référente indiquée ci-dessous. Si un message d'erreur apparaît, transmettez-le dans votre demande.",
+    contact:"jessyca"
+  },
+  {
+    id:"formation-demande",
+    category:"Formation",
+    keywords:["formation","former","stage","cnfpt","catalogue","formation professionnelle"],
+    title:"Question sur une formation",
+    answer:"Pour une demande de formation, une question sur le catalogue ou le suivi d'une inscription, contactez le Service Formation.",
+    contact:"formation"
+  },
+  {
+    id:"carriere",
+    category:"Carrière",
+    keywords:["carrière","carriere","avancement","promotion","grade","échelon","echelon","titularisation","mutation","mobilité","mobilite","entretien professionnel"],
+    title:"Question concernant votre carrière",
+    answer:"Pour une question sur votre situation administrative, votre grade, votre échelon, un avancement ou votre évolution de carrière, contactez votre gestionnaire carrière.",
+    contact:"gestionnaireCarriere"
+  },
+  {
+    id:"informatique",
+    category:"Informatique",
+    keywords:["ordinateur","pc","imprimante","informatique","souris","clavier","logiciel","écran","ecran","panne"],
+    title:"Problème informatique",
+    answer:"Pour un problème matériel ou informatique, contactez le service informatique de la collectivité.",
+    contact:"informatique"
+  }
+];
+
+const suggestions = [
+  ["Congés / absences","J'ai un problème avec mes congés"],
+  ["Paie","Je ne comprends pas mon dernier bulletin de salaire"],
+  ["Intranet","Je n'arrive pas à me connecter à l'intranet"],
+  ["Formation","Je souhaite faire une formation"],
+  ["Carrière","J'ai une question sur mon avancement"]
+];
+
+document.getElementById("orgName").textContent = ORG_NAME;
+
+function escapeHtml(s){
+  return String(s).replace(/[&<>"']/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#039;"}[c]));
+}
+function normalize(s){
+  return s.toLowerCase().normalize("NFD").replace(/[\u0300-\u036f]/g,"");
+}
+function score(question,item){
+  const q=normalize(question);
+  let total=0;
+  for(const k of item.keywords){
+    const nk=normalize(k);
+    if(q.includes(nk)) total += nk.length >= 7 ? 3 : 2;
+  }
+  return total;
+}
+function findMatches(question){
+  return FAQ.map(x=>({item:x,score:score(question,x)}))
+    .filter(x=>x.score>0).sort((a,b)=>b.score-a.score);
+}
+function contactHtml(contactKey){
+  const c=CONTACTS[contactKey];
+  if(!c) return "";
+  const emailOk=c.email && !c.email.includes("A_COMPLETER");
+  const phoneOk=c.phone && !c.phone.includes("A_COMPLETER");
+  let out=`<div class="contact"><strong>📍 Interlocuteur : ${escapeHtml(c.label)}</strong>`;
+  if(emailOk) out+=`<div>✉️ <a href="mailto:${escapeHtml(c.email)}">${escapeHtml(c.email)}</a></div>`;
+  else out+=`<div>✉️ Email : <em>à compléter</em></div>`;
+  if(phoneOk) out+=`<div>☎️ ${escapeHtml(c.phone)}</div>`;
+  else out+=`<div>☎️ Téléphone : <em>à compléter</em></div>`;
+  out+=`</div><div class="actions">`;
+  if(emailOk) out+=`<a class="action primary" href="mailto:${escapeHtml(c.email)}">✉️ Envoyer un email</a>`;
+  if(phoneOk) out+=`<a class="action" href="tel:${escapeHtml(c.phone.replace(/\s/g,''))}">☎️ Appeler</a>`;
+  out+=`</div>`;
+  return out;
+}
+function addMessage(html,who="bot"){
+  const el=document.createElement("div");
+  el.className="msg "+who;
+  el.innerHTML=html;
+  document.getElementById("chat").appendChild(el);
+  el.scrollIntoView({behavior:"smooth",block:"nearest"});
+}
+function answer(question){
+  const matches=findMatches(question);
+  if(!matches.length){
+    addMessage(`<div class="answer"><h3>Je n'ai pas identifié votre demande</h3>
+      <p>Essayez avec des mots comme <strong>congés</strong>, <strong>bulletin de salaire</strong>,
+      <strong>carrière</strong>, <strong>formation</strong>, <strong>intranet</strong> ou <strong>informatique</strong>.</p>
+      <p>Si vous le souhaitez, vous pouvez également contacter directement le service RH.</p></div>`);
+    return;
+  }
+  const best=matches[0];
+  const second=matches[1];
+  let html=`<div class="answer"><span class="badge">${escapeHtml(best.item.category)}</span>
+    <h3>${escapeHtml(best.item.title)}</h3><p>${escapeHtml(best.item.answer)}</p>
+    ${contactHtml(best.item.contact)}`;
+  if(second && second.score>=best.score-1){
+    html+=`<p style="margin-top:14px;color:#667085;font-size:13px">Si votre question est plutôt liée à <strong>${escapeHtml(second.item.category)}</strong>,
+    dites-le-moi ou reformulez votre demande.</p>`;
+  }
+  html+=`</div>`;
+  addMessage(html);
+}
+function submitQuestion(q){
+  q=q.trim(); if(!q)return;
+  addMessage(escapeHtml(q),"user");
+  setTimeout(()=>answer(q),120);
+  document.getElementById("question").value="";
+}
+document.getElementById("questionForm").addEventListener("submit",e=>{
+  e.preventDefault(); submitQuestion(document.getElementById("question").value);
+});
+const sug=document.getElementById("suggestions");
+suggestions.forEach(([label,q])=>{
+  const b=document.createElement("button");b.className="chip";b.type="button";b.textContent=label;
+  b.onclick=()=>submitQuestion(q);sug.appendChild(b);
+});
+</script>
+</body>
+</html>
