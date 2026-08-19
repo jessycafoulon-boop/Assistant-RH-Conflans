@@ -122,19 +122,13 @@ const CONTACTS = {
   - links : liens facultatifs
 */
 const FAQ = [
-  {
-  id:"dossier",
-  icon:"👤",
-  title:"Mon dossier",
-  desc:"Coordonnées, documents, informations personnelles",
-  contact:"dossier",
-  qs:[
-    ["Comment modifier mon adresse ?","adresse, changement adresse, modifier adresse, nouvelle adresse"],
-    ["Comment modifier mes coordonnées ?","coordonnées, adresse, téléphone, changement d'adresse"],
-    ["Comment récupérer un document RH ?","document, récupérer, télécharger, dossier"],
-    ["Comment signaler un changement de situation personnelle ?","situation personnelle, changement, état civil"],
-    ["Comment modifier mes informations personnelles ?","informations personnelles, dossier agent"]
-  ]
+{
+    id:"adresse",
+    category:"Mon dossier",
+    keywords:["adresse","modifier adresse","changement adresse","nouvelle adresse","déménagement","demenagement"],
+    title:"Comment modifier mon adresse ?",
+    answer:"Pour modifier votre adresse, contactez votre gestionnaire carrière afin de connaître la procédure à suivre et les éventuels justificatifs à transmettre.",
+    contact:"gestionnaireCarriere"
 },
   {
     id: "conges-solde",
@@ -187,13 +181,14 @@ const FAQ = [
 ];
 
 const suggestions = [
-  ["Congés / Absences","J'ai un problème avec mes congés"],
+  ["Congés / absences","J'ai un problème avec mes congés"],
   ["Paie","Je ne comprends pas mon dernier bulletin de salaire"],
   ["Intranet","Je n'arrive pas à me connecter à l'intranet"],
   ["Formation","Je souhaite faire une formation"],
-  ["Carrière","J'ai une question sur mon avancement"]
-];
-
+  ["Carrière","J'ai une question sur mon avancement"],
+  ["Dossier administratif","Comment modifier mon adresse ?"]
+  ];
+  
 document.getElementById("orgName").textContent = ORG_NAME;
 
 function escapeHtml(s){
