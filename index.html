@@ -1,4 +1,3 @@
-
 <!doctype html>
 <html lang="fr">
 <head>
@@ -123,60 +122,61 @@ const CONTACTS = {
   - links : liens facultatifs
 */
 const FAQ = [
-   {
-    id:"dossier admin",
-    category:"Dossier administratif",
-    keywords:["adresse","coordonnées bancaires","RIB","changement de situation familiale","mariage","naissance","PACS", "dossier administratif","attestation employeur","certificat de travail"],
-    title:"Question sur vos congés ou votre solde",
-    answer:"Pour une question concernant vos congés, votre solde de jours ou une anomalie dans votre compteur, contactez votre gestionnaire carrière.",
-    contact:"gestionnaireCarriere"
-  },
-    id:"conges-solde",
-    category:"Congés / absences",
-    keywords:["congé","conges","congés","solde","jours","vacances","rtt","absence"],
-    title:"Question sur vos congés ou votre solde",
-    answer:"Pour une question concernant vos congés, votre solde de jours ou une anomalie dans votre compteur, contactez votre gestionnaire carrière.",
-    contact:"gestionnaireCarriere"
+  {
+    id: "dossier admin",
+    category: "Dossier administratif",
+    keywords: ["adresse","coordonnées bancaires","RIB","changement de situation familiale","mariage","naissance","PACS", "dossier administratif","attestation employeur","certificat de travail"],
+    title: "Question sur vos congés ou votre solde",
+    answer: "Pour une question concernant vos congés, votre solde de jours ou une anomalie dans votre compteur, contactez votre gestionnaire carrière.",
+    contact: "gestionnaireCarriere"
   },
   {
-    id:"bulletin",
-    category:"Paie",
-    keywords:["bulletin","salaire","paie","paye","remuneration","rémunération","fiche de paie","fiche de salaire","prime","prélèvement","prelevement"],
-    title:"Question sur votre bulletin de salaire",
-    answer:"Pour toute question sur votre dernier bulletin de salaire, son contenu, une prime, une retenue ou une variation de rémunération, contactez RH Paie.",
-    contact:"rhPaie"
+    id: "conges-solde",
+    category: "Congés / absences",
+    keywords: ["congé","conges","congés","solde","jours","vacances","rtt","absence"],
+    title: "Question sur vos congés ou votre solde",
+    answer: "Pour une question concernant vos congés, votre solde de jours ou une anomalie dans votre compteur, contactez votre gestionnaire carrière.",
+    contact: "gestionnaireCarriere"
   },
   {
-    id:"connexion-intranet",
-    category:"Intranet / accès",
-    keywords:["intranet","connexion","connecter","connexion intranet","mot de passe","identifiant","login","accès","acces"],
-    title:"Problème de connexion à l'intranet",
-    answer:"Si vous n'arrivez pas à vous connecter à l'intranet, contactez la personne référente indiquée ci-dessous. Si un message d'erreur apparaît, transmettez-le dans votre demande.",
-    contact:"jessyca"
+    id: "bulletin",
+    category: "Paie",
+    keywords: ["bulletin","salaire","paie","paye","remuneration","rémunération","fiche de paie","fiche de salaire","prime","prélèvement","prelevement"],
+    title: "Question sur votre bulletin de salaire",
+    answer: "Pour toute question sur votre dernier bulletin de salaire, son contenu, une prime, une retenue ou une variation de rémunération, contactez RH Paie.",
+    contact: "rhPaie"
   },
   {
-    id:"formation-demande",
-    category:"Formation",
-    keywords:["formation","former","stage","cnfpt","catalogue","formation professionnelle"],
-    title:"Question sur une formation",
-    answer:"Pour une demande de formation, une question sur le catalogue ou le suivi d'une inscription, contactez le Service Formation.",
-    contact:"formation"
+    id: "connexion-intranet",
+    category: "Intranet / accès",
+    keywords: ["intranet","connexion","connecter","connexion intranet","mot de passe","identifiant","login","accès","acces"],
+    title: "Problème de connexion à l'intranet",
+    answer: "Si vous n'arrivez pas à vous connecter à l'intranet, contactez la personne référente indiquée ci-dessous. Si un message d'erreur apparaît, transmettez-le dans votre demande.",
+    contact: "jessyca"
   },
   {
-    id:"carriere",
-    category:"Carrière",
-    keywords:["carrière","carriere","avancement","promotion","grade","échelon","echelon","titularisation","mutation","mobilité","mobilite","entretien professionnel"],
-    title:"Question concernant votre carrière",
-    answer:"Pour une question sur votre situation administrative, votre grade, votre échelon, un avancement ou votre évolution de carrière, contactez votre gestionnaire carrière.",
-    contact:"gestionnaireCarriere"
+    id: "formation-demande",
+    category: "Formation",
+    keywords: ["formation","former","stage","cnfpt","catalogue","formation professionnelle"],
+    title: "Question sur une formation",
+    answer: "Pour une demande de formation, une question sur le catalogue ou le suivi d'une inscription, contactez le Service Formation.",
+    contact: "formation"
   },
   {
-    id:"informatique",
-    category:"Informatique",
-    keywords:["ordinateur","pc","imprimante","informatique","souris","clavier","logiciel","écran","ecran","panne"],
-    title:"Problème informatique",
-    answer:"Pour un problème matériel ou informatique, contactez le service informatique de la collectivité.",
-    contact:"informatique"
+    id: "carriere",
+    category: "Carrière",
+    keywords: ["carrière","carriere","avancement","promotion","grade","échelon","echelon","titularisation","mutation","mobilité","mobilite","entretien professionnel"],
+    title: "Question concernant votre carrière",
+    answer: "Pour une question sur votre situation administrative, votre grade, votre échelon, un avancement ou votre évolution de carrière, contactez votre gestionnaire carrière.",
+    contact: "gestionnaireCarriere"
+  },
+  {
+    id: "informatique",
+    category: "Informatique",
+    keywords: ["ordinateur","pc","imprimante","informatique","souris","clavier","logiciel","écran","ecran","panne"],
+    title: "Problème informatique",
+    answer: "Pour un problème matériel ou informatique, contactez le service informatique de la collectivité.",
+    contact: "informatique"
   }
 ];
 
@@ -191,7 +191,7 @@ const suggestions = [
 document.getElementById("orgName").textContent = ORG_NAME;
 
 function escapeHtml(s){
-  return String(s).replace(/[&<>"']/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#039;"}[c]));
+  return String(s).replace(/[&<>"']/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;","\"":"&quot;","'":"&#039;"}[c]));
 }
 function normalize(s){
   return s.toLowerCase().normalize("NFD").replace(/[\u0300-\u036f]/g,"");
