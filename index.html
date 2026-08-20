@@ -244,7 +244,7 @@ function contactHtml(contactKey){
   if(!c) return "";
   const emailOk=c.email && !c.email.includes("A_COMPLETER");
   const phoneOk=c.phone && !c.phone.includes("A_COMPLETER");
-  let out=`<div class="contact"><strong>📍 Interlocuteur : ${escapeHtml(c.label)}</strong>`;
+  let out=`<div class="contact"><strong>📍 Votre interlocuteur : ${escapeHtml(c.label)}</strong>`;
   if(emailOk) out+=`<div>✉️ <a href="mailto:${escapeHtml(c.email)}">${escapeHtml(c.email)}</a></div>`;
   else out+=`<div>✉️ Email : <em>à compléter</em></div>`;
   if(phoneOk) out+=`<div>☎️ ${escapeHtml(c.phone)}</div>`;
