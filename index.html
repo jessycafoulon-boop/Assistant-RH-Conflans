@@ -91,7 +91,7 @@ const CONTACTS = {
     phone: "A_COMPLETER"
   },
   rhPaie: {
-    label: "RH Paie",
+    label: "Vos Gestionnaires Paie",
     email: "rhpaie@mairie-conflans.fr",
     phone: "A_COMPLETER"
   },
@@ -122,14 +122,30 @@ const CONTACTS = {
   - links : liens facultatifs
 */
 const FAQ = [
-{
-    id:"adresse",
-    category:"Dossier administratif",
-    keywords:["adresse","modifier adresse","changement adresse","nouvelle adresse","déménagement","demenagement"],
-    title:"J'ai déménagé, comment modifier mon adresse ?",
-    answer:"Pour modifier votre adresse, contactez votre gestionnaire carrière afin de connaître la procédure à suivre et les éventuels justificatifs à transmettre.",
-    contact:"gestionnaireCarriere"
-},
+  {
+    id: "conges",
+    category: "Congés / Absences",
+    keywords: ["congé","conges","congés","solde","jours","vacances","rtt","absence","CET"],
+    title: "Question sur vos congés, votre solde ou votre CET",
+    answer: "Pour une question concernant vos congés, votre solde de jours ou une anomalie dans votre compteur, contactez votre gestionnaire carrière.",
+    contact: "gestionnaireCarriere"
+  },
+   {
+    id: "conges",
+    category: "Congés / Absences",
+    keywords: ["mariage","PACS","déménagement","décès","enfant malade","mon enfant est malade","absence constatée"],
+    title: "Question sur une absence exceptionnelle (ASA)",
+    answer: "Pour une question concernant une absence exceptionnelle, contactez votre gestionnaire carrière.",
+    contact: "gestionnaireCarriere"
+  },
+  {
+    id: "bulletin salaire",
+    category: "Paie",
+    keywords: ["bulletin","salaire","paie","paye","remuneration","rémunération","fiche de paie","fiche de salaire","prime","prélèvement","prelevement","remboursement","abonnement"],
+    title: "Question sur votre bulletin de salaire",
+    answer: "Pour toute question sur votre dernier bulletin de salaire, son contenu, une prime, une retenue ou une variation de rémunération, contactez RH Paie.",
+    contact: "rhPaie"
+  },
   {
     id:"rib",
     category:"Paie",
@@ -139,29 +155,37 @@ const FAQ = [
     contact:"gestionnaireCarriere"
 },
   {
-    id: "conges-solde",
-    category: "Congés / RTT / Absences",
-    keywords: ["congé","conges","congés","solde","jours","vacances","rtt","absence","CET"],
-    title: "Question sur vos congés, votre solde ou votre CET",
-    answer: "Pour une question concernant vos congés, votre solde de jours ou une anomalie dans votre compteur, contactez votre gestionnaire carrière.",
-    contact: "gestionnaireCarriere"
-  },
-   {
-    id: "conges-solde",
-    category: "Congés / RTT / Absences",
-    keywords: ["mariage","PACS","déménagement","décès","enfant malade","mon enfant est malade","absence constatée"],
-    title: "Question sur une absence exceptionnelle",
-    answer: "Pour une question concernant une absence exceptionnelle, contactez votre gestionnaire carrière.",
-    contact: "gestionnaireCarriere"
+    id:"adresse",
+    category:"Dossier administratif",
+    keywords:["adresse","modifier adresse","changement adresse","nouvelle adresse","déménagement","demenagement"],
+    title:"J'ai déménagé, comment modifier mon adresse ?",
+    answer:"Pour modifier votre adresse, contactez votre gestionnaire carrière afin de connaître la procédure à suivre et les éventuels justificatifs à transmettre.",
+    contact:"gestionnaireCarriere"
+},
+  {
+    id: "formation",
+    category: "Formation",
+    keywords: ["formation","former","stage","cnfpt","catalogue","formation professionnelle","absence formation"],
+    title: "Question sur une formation",
+    answer: "Pour une demande de formation, une question sur le catalogue ou le suivi d'une inscription, contactez le Service Formation.",
+    contact: "formation"
   },
   {
-    id: "bulletin",
-    category: "Paie / Bulletin de salaire",
-    keywords: ["bulletin","salaire","paie","paye","remuneration","rémunération","fiche de paie","fiche de salaire","prime","prélèvement","prelevement","remboursement","abonnement"],
-    title: "Question sur votre bulletin de salaire",
-    answer: "Pour toute question sur votre dernier bulletin de salaire, son contenu, une prime, une retenue ou une variation de rémunération, contactez RH Paie.",
-    contact: "rhPaie"
-  },
+    id:"concours et examens pro",
+    category:"Formation",
+    keywords:["concours","état des services","inscription","calendrier","prépa","examen professionnel","état des services"],
+    title:"Je souhaite des renseignements sur les concours ou les examens professionnels",
+    answer:"Contactez le service Formation afin de connaître la marche à suivre et les éventuels justificatifs à transmettre.",
+    contact:"formation"
+},
+  {
+    id:"cpf",
+    category:"Formation",
+    keywords:["CPF","compte personnel de formation","heures CPF","compteur CPF","solde"],
+    title:"Ma question concerne mon CPF (Compte Personnel de Formation)",
+    answer:"Pour obtenir des informations votre compte CPF ou son utilisation, contactez le service Formation",
+    contact:"formation"
+},
   {
     id: "connexion-intranet",
     category: "Intranet / accès",
@@ -170,30 +194,6 @@ const FAQ = [
     answer: "Si vous n'arrivez pas à vous connecter à l'intranet, contactez la personne référente indiquée ci-dessous. Si un message d'erreur apparaît, transmettez-le dans votre demande.",
     contact: "jessyca"
   },
-  {
-    id: "formation-demande",
-    category: "Formation",
-    keywords: ["formation","former","stage","cnfpt","catalogue","formation professionnelle","absence formation"],
-    title: "Question sur une formation",
-    answer: "Pour une demande de formation, une question sur le catalogue ou le suivi d'une inscription, contactez le Service Formation.",
-    contact: "formation"
-  },
-  {
-    id:"formation-demande",
-    category:"Formation",
-    keywords:["concours","état des services","inscription","calendrier","prépa","examen professionnel","état des services"],
-    title:"Je souhaite des renseignements sur les concours ou les examens professionnels",
-    answer:"Contactez le service Formation afin de connaître la marche à suivre et les éventuels justificatifs à transmettre.",
-    contact:"formation"
-},
-  {
-    id:"formation-demande",
-    category:"Formation",
-    keywords:["CPF","compte personnel de formation","heures CPF","compteur CPF","solde"],
-    title:"Ma question concerne mon CPF (Compte Personnel de Formation)",
-    answer:"Pour obtenir des informations votre compte CPF ou son utilisation, contactez le service Formation",
-    contact:"formation"
-},
    {
     id:"formation-demande",
     category:"Formation",
