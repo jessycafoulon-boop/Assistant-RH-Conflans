@@ -125,23 +125,23 @@ const FAQ = [
   {
     id: "conges",
     category: "Congés / Absences",
-    keywords: ["congé","conges","congés","solde","jours","vacances","rtt","absence","CET"],
+    keywords: ["congé","conges","congés","congés annuels","solde congés","poser congé","annuler congé","modifier congé","reporter congé","congés non pris","jours","vacances","rtt","RTT","absence","CET","solde CET","compte épargne temps","solde compte épargne temps","congé bonifié"],
     title: "Question sur vos congés, votre solde ou votre CET",
-    answer: "Pour une question concernant vos congés, votre solde de jours ou une anomalie dans votre compteur, contactez votre gestionnaire carrière.",
+    answer: "Pour une question concernant vos congés, votre CET, votre solde de jours ou une anomalie dans votre compteur, contactez votre gestionnaire carrière.",
     contact: "gestionnaireCarriere"
   },
    {
-    id: "conges",
+    id: "asa",
     category: "Congés / Absences",
-    keywords: ["mariage","PACS","déménagement","décès","enfant malade","mon enfant est malade","absence constatée"],
+    keywords: ["mariage","PACS","déménagement","décès","enfant malade","mon enfant est malade","absence constatée","ASA","autorisation spéciale d'absence","absence exceptionnelle","absence urgente","justificatif d'absence"],
     title: "Question sur une absence exceptionnelle (ASA)",
     answer: "Pour une question concernant une absence exceptionnelle, contactez votre gestionnaire carrière.",
     contact: "gestionnaireCarriere"
   },
   {
-    id: "bulletin salaire",
+    id: "salaire",
     category: "Paie",
-    keywords: ["bulletin","salaire","paie","paye","remuneration","rémunération","fiche de paie","fiche de salaire","prime","prélèvement","prelevement","remboursement","abonnement"],
+    keywords: ["bulletin","salaire","paie","paye","remuneration","rémunération","fiche de paie","fiche de salaire","bulletin de salaire","prime","prélèvement","prelevement","remboursement","abonnement","transports","Navigo","prime","indemnité","régime indemnitaire","RIFSEEP","IFSE","CIA","NBI","indice majoré","SFT","supplément familial","prélèvement à la source","retenue sur salaire","régularisation","heures supplémentaires","astreinte","permanence"],
     title: "Question sur votre bulletin de salaire",
     answer: "Pour toute question sur votre dernier bulletin de salaire, son contenu, une prime, une retenue ou une variation de rémunération, contactez RH Paie.",
     contact: "rhPaie"
@@ -149,10 +149,18 @@ const FAQ = [
   {
     id:"rib",
     category:"Paie",
-    keywords:["RIB","modifier","changement","nouvelle banque","nouveau RIB"],
+    keywords:["RIB","modifier","changement","nouvelle banque","nouveau RIB","frais de mission","remboursement","coordonnées bancaires"],
     title:"J'ai changé de coordonnées bancaires, comment transmettre mon nouveau RIB ?",
     answer:"Pour transmettre votre nouveau RIB, contactez le service Paie qui vous indiquera la procédure à suivre.",
     contact:"rhPaie"
+},
+   {
+    id:"frais de mission",
+    category:"Paie",
+    keywords:["frais de mission","remboursement","hotel","hôtel","restauration","frais kilométriques","formulaire","déplacement","transports"],
+    title:"Ma question concerne des frais de mission ou de déplacement",
+    answer:"Pour obtenir des informations sur le remboursement des frais liés à vos missions ou déplacements, contactez le service Formation",
+    contact:"formation"
 },
    {
     id:"carte Pluxee",
@@ -171,6 +179,14 @@ const FAQ = [
     contact:"gestionnaireCarriere"
 },
   {
+    id: "dossier agent",
+    category: "Dossier administratif",
+    keywords: ["dossier agent","dossier administratif","gestion administrative","adresse","changement d'adresse","domicile, coordonnées personnelles","situation familiale","mariage","PACS","divorce","naissance","enfant","livret de famille","arrêté","numéro d'agent","matricule","correction dossier","rectification données personnelles"],
+    title: "Question concernant votre carrière",
+    answer: "Pour une question sur votre situation administrative, votre grade, votre échelon, un avancement ou votre évolution de carrière, contactez votre gestionnaire carrière.",
+    contact: "gestionnaireCarriere"
+  },
+  {
     id: "carriere",
     category: "Dossier administratif",
     keywords: ["carrière","carriere","avancement","promotion","grade","échelon","echelon","titularisation","mutation","mobilité","mobilite","entretien professionnel"],
@@ -181,7 +197,7 @@ const FAQ = [
   {
     id: "formation",
     category: "Formation",
-    keywords: ["formation","former","stage","cnfpt","catalogue","formation professionnelle","absence formation"],
+    keywords: ["formation","former","stage","cnfpt","catalogue","formation professionnelle","absence formation","inscription formation","demande formation","financement formation","bilan de compétences","VAE","validation des acquis","congé de formation","reconversion","projet professionnel","formation obligatoire","attestation de formation","attestation de formation"],
     title: "Question sur une formation",
     answer: "Pour une demande de formation, une question sur le catalogue ou le suivi d'une inscription, contactez le Service Formation.",
     contact: "formation"
@@ -189,25 +205,25 @@ const FAQ = [
   {
     id:"concours et examens pro",
     category:"Formation",
-    keywords:["concours","état des services","inscription","calendrier","prépa","examen professionnel","état des services"],
+    keywords:["concours","inscription","calendrier","prépa","préparation concours","examen professionnel"],
     title:"Je souhaite des renseignements sur les concours ou les examens professionnels",
     answer:"Contactez le service Formation afin de connaître la marche à suivre et les éventuels justificatifs à transmettre.",
+    contact:"formation"
+},
+   {
+    id:"etat des services",
+    category:"Formation",
+    keywords:["état des services","etat des services","état services"],
+    title:"Je souhaite obtenir mon état des services",
+    answer:"Contactez le service Formation par email.",
     contact:"formation"
 },
     {
     id:"cpf",
     category:"Formation",
-    keywords:["CPF","compte personnel de formation","heures CPF","compteur CPF","solde"],
+    keywords:["CPF","compte personnel de formation","heures CPF","compteur CPF","solde CPF"],
     title:"Ma question concerne mon CPF (Compte Personnel de Formation)",
     answer:"Pour obtenir des informations sur votre compte CPF ou son utilisation, contactez le service Formation",
-    contact:"formation"
-},
-    {
-    id:"frais de mission",
-    category:"Formation",
-    keywords:["frais de mission","remboursement","hotel","hôtel","restauration","frais kilométriques","formulaire","déplacement","transports"],
-    title:"Ma question concerne des frais de mission ou de déplacement",
-    answer:"Pour obtenir des informations sur le remboursement des frais liés à vos missions ou déplacements, contactez le service Formation",
     contact:"formation"
 },
   {
